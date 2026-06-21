@@ -3,7 +3,7 @@ package render
 import (
 	"strings"
 
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
 )
 
 func Classic(width int, data dashboard.Data, showTask bool, showLoad bool) string {

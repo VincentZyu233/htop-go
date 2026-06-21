@@ -49,7 +49,7 @@ git commit -m "docs: update README"
 | macOS | `arm64` | 原生 Go 二进制 |
 | Android | `arm64` | 面向 Termux 的目标 |
 | Android | `amd64` | 面向模拟器 / x86_64 Android |
-| Android | `arm` | 32 位 ARM Android |
+| Android | `arm32` | 32 位 ARM Android |
 
 ## 📦 流水线阶段
 

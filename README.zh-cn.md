@@ -5,14 +5,14 @@
 > **[📖 English](README.md)**
 > **[📖 简体中文](README.zh-cn.md)**
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/htop-go)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyu233/htop-go)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/htop-go)
 
 [![Go 1.24.6](https://img.shields.io/badge/Go-1.24.6-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
 
-[![Last Commit](https://img.shields.io/github/last-commit/VincentZyuApps/htop-go?style=for-the-badge&logo=git&logoColor=white&label=Last%20Commit)](https://github.com/VincentZyuApps/htop-go/commits/main)
+[![Last Commit](https://img.shields.io/github/last-commit/VincentZyu233/htop-go?style=for-the-badge&logo=git&logoColor=white&label=Last%20Commit)](https://github.com/VincentZyu233/htop-go/commits/main)
 
-[![CI](https://img.shields.io/github/actions/workflow/status/VincentZyuApps/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyuApps/htop-go/actions/workflows/build.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/VincentZyu233/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyu233/htop-go/actions/workflows/build.yml)
 
 ## 🌍 平台目标
 
@@ -53,7 +53,7 @@ go run . --table --task
 适用于 Debian / Ubuntu、Fedora / RHEL 和 Termux 的一键安装脚本：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh | bash
 htop-go --help
 ```
 
@@ -67,7 +67,7 @@ htop-go --help
 手动指定版本：
 
 ```bash
-HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh)"
+HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh)"
 ```
 
 > ⚠️ 上面两个 `curl ... | bash` 安装脚本支持 `apt`、`dnf` 和 Termux，本质上会把 release 二进制直接安装到 `PATH` 中。
@@ -200,7 +200,7 @@ Workflow 文件：
 - macOS `arm64`
 - Android `arm64`
 - Android `amd64`
-- Android `arm`
+- Android `arm32`
 
 产物命名：
 

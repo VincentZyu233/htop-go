@@ -7,7 +7,7 @@ import (
 	"github.com/shirou/gopsutil/v4/host"
 	"github.com/shirou/gopsutil/v4/load"
 
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
 )
 
 func CollectDashboardData() dashboard.Data {

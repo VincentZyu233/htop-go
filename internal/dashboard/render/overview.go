@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
 )
 
 func Overview(width int, data dashboard.Data, showTask bool, showLoad bool) string {

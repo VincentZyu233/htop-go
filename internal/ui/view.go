@@ -6,8 +6,8 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
-	drender "github.com/VincentZyuApps/htop-go/internal/dashboard/render"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
+	drender "github.com/VincentZyu233/htop-go/internal/dashboard/render"
 )
 
 var (

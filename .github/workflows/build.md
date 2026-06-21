@@ -49,7 +49,7 @@ git commit -m "docs: update README"
 | macOS | `arm64` | native Go binary |
 | Android | `arm64` | Termux-friendly target |
 | Android | `amd64` | emulator / x86_64 Android target |
-| Android | `arm` | 32-bit ARM Android target |
+| Android | `arm32` | 32-bit ARM Android target |
 
 ## 📦 Pipeline Stages
 

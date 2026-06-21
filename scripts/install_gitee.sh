@@ -100,8 +100,8 @@ else
   echo "   sudo rm -f /usr/local/bin/${BIN_NAME}"
 fi
 echo ""
-echo "   📖 GitHub: https://github.com/VincentZyuApps/htop-go"
+echo "   📖 GitHub: https://github.com/VincentZyu233/htop-go"
 echo "   📖 Gitee:  https://gitee.com/${OWNER}/${REPO}"
 echo ""
 echo "   🌐 GitHub 安装脚本:"
-echo "   curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh | bash"
+echo "   curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh | bash"

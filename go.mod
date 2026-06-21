@@ -1,4 +1,4 @@
-module github.com/VincentZyuApps/htop-go
+module github.com/VincentZyu233/htop-go
 
 go 1.24.6
 

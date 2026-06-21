@@ -1,10 +1,10 @@
 #!/bin/bash
 # htop-go installer — supports apt / dnf / Termux
-# Usage: curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh | bash
-# Install specific version: HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh)"
+# Usage: curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh | bash
+# Install specific version: HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh)"
 set -e
 
-REPO="VincentZyuApps/htop-go"
+REPO="VincentZyu233/htop-go"
 API_URL="https://api.github.com/repos/${REPO}/releases/latest"
 BIN_NAME="htop-go"
 

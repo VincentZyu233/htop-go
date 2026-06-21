@@ -8,9 +8,9 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
-	"github.com/VincentZyuApps/htop-go/internal/ui"
-	appversion "github.com/VincentZyuApps/htop-go/internal/version"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
+	"github.com/VincentZyu233/htop-go/internal/ui"
+	appversion "github.com/VincentZyu233/htop-go/internal/version"
 )
 
 func main() {

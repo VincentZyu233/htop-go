@@ -5,8 +5,8 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/VincentZyuApps/htop-go/internal/dashboard"
-	"github.com/VincentZyuApps/htop-go/internal/metrics"
+	"github.com/VincentZyu233/htop-go/internal/dashboard"
+	"github.com/VincentZyu233/htop-go/internal/metrics"
 )
 
 type model struct {

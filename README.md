@@ -5,14 +5,14 @@
 > **[📖 English](README.md)**
 > **[📖 简体中文](README.zh-cn.md)**
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/htop-go)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyu233/htop-go)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/htop-go)
 
 [![Go 1.24.6](https://img.shields.io/badge/Go-1.24.6-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
 
-[![Last Commit](https://img.shields.io/github/last-commit/VincentZyuApps/htop-go?style=for-the-badge&logo=git&logoColor=white&label=Last%20Commit)](https://github.com/VincentZyuApps/htop-go/commits/main)
+[![Last Commit](https://img.shields.io/github/last-commit/VincentZyu233/htop-go?style=for-the-badge&logo=git&logoColor=white&label=Last%20Commit)](https://github.com/VincentZyu233/htop-go/commits/main)
 
-[![CI](https://img.shields.io/github/actions/workflow/status/VincentZyuApps/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyuApps/htop-go/actions/workflows/build.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/VincentZyu233/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyu233/htop-go/actions/workflows/build.yml)
 
 ## 🌍 Platform Goals
 
@@ -53,7 +53,7 @@ go run . --table --task
 One-liner install script for Debian / Ubuntu, Fedora / RHEL, and Termux:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh | bash
 htop-go --help
 ```
 
@@ -67,7 +67,7 @@ htop-go --help
 Manual version pin:
 
 ```bash
-HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyuApps/htop-go/main/scripts/install.sh)"
+HTOP_GO_VERSION=v0.1.0 bash -c "$(curl -fsSL https://raw.githubusercontent.com/VincentZyu233/htop-go/main/scripts/install.sh)"
 ```
 
 > ⚠️ The two `curl ... | bash` install scripts support `apt`, `dnf`, and Termux. They install the release binary directly into `PATH`.
@@ -200,7 +200,7 @@ Current targets:
 - macOS `arm64`
 - Android `arm64`
 - Android `amd64`
-- Android `arm`
+- Android `arm32`
 
 Artifact naming:
 
