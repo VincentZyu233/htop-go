@@ -10,6 +10,8 @@
 
 [![Go 1.24.6](https://img.shields.io/badge/Go-1.24.6-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
 
+[![Last Commit](https://img.shields.io/github/last-commit/VincentZyuApps/htop-go?style=for-the-badge&logo=git&logoColor=white&label=Last%20Commit)](https://github.com/VincentZyuApps/htop-go/commits/main)
+
 [![CI](https://img.shields.io/github/actions/workflow/status/VincentZyuApps/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyuApps/htop-go/actions/workflows/build.yml)
 
 ## 🌍 平台目标
