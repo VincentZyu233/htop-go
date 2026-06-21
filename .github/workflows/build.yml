@@ -1,0 +1,208 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    name: Check commit message
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.flags.outputs.should_build }}
+      should_release: ${{ steps.flags.outputs.should_release }}
+      version: ${{ steps.flags.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse build flags
+        id: flags
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          VERSION="v$(sed -n 's/^const Number = \"\\(.*\\)\"$/\\1/p' internal/version/version.go)"
+          if [ -z "$VERSION" ] || [ "$VERSION" = "v" ]; then
+            echo "❌ Failed to read version from internal/version/version.go"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "📦 Version: $VERSION"
+
+          if [ "$EVENT_NAME" = "pull_request" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          MSG="${COMMIT_MSG:-}"
+          BUILD=false
+          RELEASE=false
+
+          if echo "$MSG" | grep -qi "build release"; then
+            BUILD=true
+            RELEASE=true
+          elif echo "$MSG" | grep -qi "build action"; then
+            BUILD=true
+          fi
+
+          echo "should_build=$BUILD" >> "$GITHUB_OUTPUT"
+          echo "should_release=$RELEASE" >> "$GITHUB_OUTPUT"
+          echo "📋 Flags: build=$BUILD release=$RELEASE"
+
+  build:
+    name: Build ${{ matrix.name }}
+    needs: check
+    if: needs.check.outputs.should_build == 'true'
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-amd64
+            runner: ubuntu-latest
+            goos: windows
+            goarch: amd64
+            ext: .exe
+          - name: windows-arm64
+            runner: ubuntu-latest
+            goos: windows
+            goarch: arm64
+            ext: .exe
+          - name: linux-amd64
+            runner: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            ext: ""
+          - name: linux-arm64
+            runner: ubuntu-latest
+            goos: linux
+            goarch: arm64
+            ext: ""
+          - name: macos-amd64
+            runner: ubuntu-latest
+            goos: darwin
+            goarch: amd64
+            ext: ""
+          - name: macos-arm64
+            runner: ubuntu-latest
+            goos: darwin
+            goarch: arm64
+            ext: ""
+          - name: android-arm64
+            runner: ubuntu-latest
+            goos: android
+            goarch: arm64
+            ext: ""
+          - name: android-amd64
+            runner: ubuntu-latest
+            goos: android
+            goarch: amd64
+            ext: ""
+          - name: android-arm
+            runner: ubuntu-latest
+            goos: android
+            goarch: arm
+            goarm: "7"
+            ext: ""
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Tidy dependencies
+        run: go mod tidy
+
+      - name: Setup Android NDK
+        if: matrix.goos == 'android'
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r26d
+
+      - name: Build binary
+        shell: bash
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          mkdir -p dist
+          ASSET="htop-go-${{ matrix.name }}-${VERSION}${{ matrix.ext }}"
+          export CGO_ENABLED=0
+
+          if [ "${GOOS}" = "android" ]; then
+            case "${GOARCH}" in
+              arm64)
+                export CGO_ENABLED=0
+                ;;
+              amd64)
+                export CGO_ENABLED=1
+                export CC="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang"
+                ;;
+              arm)
+                export CGO_ENABLED=1
+                export GOARM="${{ matrix.goarm }}"
+                export CC="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi24-clang"
+                ;;
+            esac
+          fi
+
+          go build -trimpath -ldflags "-s -w" -o "dist/${ASSET}" .
+          echo "ASSET=${ASSET}" >> "$GITHUB_ENV"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ASSET }}
+          path: dist/${{ env.ASSET }}
+
+  release:
+    name: Publish Release
+    needs: [check, build]
+    if: needs.check.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Render release notes
+        id: notes
+        shell: bash
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+          REPO: ${{ github.repository }}
+        run: |
+          BODY_PATH="release_body.md"
+          sed \
+            -e "s|__REPO__|${REPO}|g" \
+            -e "s|__VERSION__|${VERSION}|g" \
+            .github/release_template.md > "${BODY_PATH}"
+          echo "body_path=${BODY_PATH}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.check.outputs.version }}
+          name: htop-go ${{ needs.check.outputs.version }}
+          body_path: ${{ steps.notes.outputs.body_path }}
+          files: dist/*
