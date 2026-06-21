@@ -29,7 +29,8 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
-          VERSION="v$(sed -n 's/^const Number = \"\\(.*\\)\"$/\\1/p' internal/version/version.go)"
+          VERSION_RAW="$(grep '^const Number = ' internal/version/version.go | cut -d'"' -f2)"
+          VERSION="v${VERSION_RAW}"
           if [ -z "$VERSION" ] || [ "$VERSION" = "v" ]; then
             echo "❌ Failed to read version from internal/version/version.go"
             exit 1

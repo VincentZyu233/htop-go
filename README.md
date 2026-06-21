@@ -7,7 +7,9 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VincentZyuApps/htop-go)
 [![Gitee](https://img.shields.io/badge/Gitee-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/vincent-zyu/htop-go)
+
 [![Go 1.24.6](https://img.shields.io/badge/Go-1.24.6-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
+
 [![CI](https://img.shields.io/github/actions/workflow/status/VincentZyuApps/htop-go/build.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/VincentZyuApps/htop-go/actions/workflows/build.yml)
 
 ## 🌍 Platform Goals
